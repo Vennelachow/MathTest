@@ -1,0 +1,154 @@
+<div class="landing-bg fun-bg">
+  <!-- Enhanced background with better gradients and animations -->
+  <div class="gradient-overlay"></div>
+  <svg class="blob-bg" viewBox="0 0 800 600" width="100%" height="100%" preserveAspectRatio="none">
+    <defs>
+      <radialGradient id="blobGrad" cx="50%" cy="50%" r="80%">
+        <stop offset="0%" stop-color="#43e97b"/>
+        <stop offset="50%" stop-color="#38f9d7"/>
+        <stop offset="100%" stop-color="#1976d2"/>
+      </radialGradient>
+      <radialGradient id="blobGrad2" cx="30%" cy="70%" r="60%">
+        <stop offset="0%" stop-color="#ffd600"/>
+        <stop offset="70%" stop-color="#ff9800"/>
+        <stop offset="100%" stop-color="#f57c00"/>
+      </radialGradient>
+    </defs>
+    <path class="blob1" d="M 400 100 Q 600 120 650 300 Q 700 480 400 500 Q 100 480 150 300 Q 200 120 400 100 Z" fill="url(#blobGrad)"/>
+    <path class="blob2" d="M 400 200 Q 500 220 550 300 Q 600 380 400 400 Q 200 380 250 300 Q 300 220 400 200 Z" fill="url(#blobGrad2)" opacity="0.25"/>
+  </svg>
+  
+  <!-- Enhanced floating elements -->
+  <div class="math-float-icons">
+    <svg class="float-icon plus" width="48" height="48" viewBox="0 0 36 36">
+      <circle cx="18" cy="18" r="18" fill="#43e97b"/>
+      <rect x="16" y="8" width="4" height="20" rx="2" fill="#fff"/>
+      <rect x="8" y="16" width="20" height="4" rx="2" fill="#fff"/>
+    </svg>
+    <svg class="float-icon times" width="48" height="48" viewBox="0 0 36 36">
+      <circle cx="18" cy="18" r="18" fill="#1976d2"/>
+      <rect x="16.5" y="8" width="3" height="20" rx="1.5" fill="#fff" transform="rotate(45 18 18)"/>
+      <rect x="16.5" y="8" width="3" height="20" rx="1.5" fill="#fff" transform="rotate(-45 18 18)"/>
+    </svg>
+    <svg class="float-icon star" width="36" height="36" viewBox="0 0 50 50">
+      <polygon points="25,2 31,18 48,18 34,29 39,46 25,36 11,46 16,29 2,18 19,18" fill="#ffd600"/>
+    </svg>
+    <ng-container *ngFor="let num of floatingNumbers; let i = index">
+      <svg class="float-icon num" [attr.width]="num.toString().length * 18 + 20" [attr.height]="40" [attr.viewBox]="'0 0 ' + (num.toString().length * 18 + 20) + ' 40'" [ngStyle]="{'left': (10 + i*8) + 'vw', 'top': (20 + (i%3)*12) + 'vh'}">
+        <circle [attr.cx]="(num.toString().length * 9 + 10)" cy="20" [attr.r]="num.toString().length * 9" fill="#1976d2"/>
+        <text [attr.x]="(num.toString().length * 9 + 10)" y="27" text-anchor="middle" [attr.font-size]="num.toString().length === 1 ? 18 : (num.toString().length === 2 ? 15 : 13)" fill="#fff" font-family="Arial">{{ num }}</text>
+      </svg>
+    </ng-container>
+  </div>
+
+  <!-- Main content container with improved layout -->
+  <div class="landing-container">
+    <div class="landing-content">
+      <!-- Header section with mascot and title -->
+      <div class="header-section">
+        <div class="mascot wizard">
+          <svg width="120" height="120" viewBox="0 0 100 100">
+            <ellipse cx="50" cy="90" rx="30" ry="10" fill="#0002"/>
+            <ellipse cx="50" cy="70" rx="22" ry="22" fill="#fff" stroke="#1976d2" stroke-width="3"/>
+            <ellipse cx="50" cy="70" rx="12" ry="12" fill="#43e97b"/>
+            <ellipse cx="50" cy="70" rx="5" ry="5" fill="#fff"/>
+            <rect x="43" y="35" width="14" height="35" rx="7" fill="#1976d2"/>
+            <ellipse cx="50" cy="35" rx="15" ry="15" fill="#1976d2"/>
+            <ellipse cx="50" cy="22" rx="10" ry="10" fill="#43e97b"/>
+            <rect x="47" y="8" width="6" height="20" rx="3" fill="#ffd600"/>
+            <polygon points="50,2 56,20 44,20" fill="#ffd600"/>
+            <circle cx="50" cy="10" r="3" fill="#fff"/>
+            <rect x="70" y="50" width="7" height="25" rx="3.5" fill="#ffd600" transform="rotate(-20 73.5 62.5)"/>
+            <circle cx="77" cy="48" r="4" fill="#fff"/>
+          </svg>
+          <div class="speech-bubble magic">Ready for a math adventure? 🎉</div>
+        </div>
+        
+        <div class="title-section">
+          <h1 class="welcome-title rainbow-text">Welcome to Maths Test!</h1>
+          <div class="subheadline">Let's play, learn, and win stars!</div>
+        </div>
+      </div>
+
+      <!-- Configuration sections -->
+      <div class="config-sections">
+        <!-- Operations section -->
+        <div class="config-section">
+          <div class="section-label">Choose your operations:</div>
+          <div class="operation-grid">
+            <div *ngFor="let op of operationOptions; let i = index"
+                 class="operation-card magic-btn"
+                 [class.selected]="op.selected"
+                 (click)="toggleOperation(i)">
+              <div class="op-icon">
+                <ng-container [ngSwitch]="op.value">
+                  <svg *ngSwitchCase="'addition'" width="40" height="40" viewBox="0 0 36 36">
+                    <circle cx="18" cy="18" r="18" fill="#43e97b"/>
+                    <rect x="16" y="8" width="4" height="20" rx="2" fill="#fff"/>
+                    <rect x="8" y="16" width="20" height="4" rx="2" fill="#fff"/>
+                  </svg>
+                  <svg *ngSwitchCase="'subtraction'" width="40" height="40" viewBox="0 0 36 36">
+                    <circle cx="18" cy="18" r="18" fill="#38f9d7"/>
+                    <rect x="8" y="16" width="20" height="4" rx="2" fill="#fff"/>
+                  </svg>
+                  <svg *ngSwitchCase="'multiplication'" width="40" height="40" viewBox="0 0 36 36">
+                    <circle cx="18" cy="18" r="18" fill="#1976d2"/>
+                    <rect x="16.5" y="8" width="3" height="20" rx="1.5" fill="#fff" transform="rotate(45 18 18)"/>
+                    <rect x="16.5" y="8" width="3" height="20" rx="1.5" fill="#fff" transform="rotate(-45 18 18)"/>
+                  </svg>
+                  <svg *ngSwitchCase="'division'" width="40" height="40" viewBox="0 0 36 36">
+                    <circle cx="18" cy="18" r="18" fill="#0f2027"/>
+                    <rect x="8" y="16" width="20" height="4" rx="2" fill="#fff"/>
+                    <circle cx="18" cy="11" r="2" fill="#fff"/>
+                    <circle cx="18" cy="25" r="2" fill="#fff"/>
+                  </svg>
+                </ng-container>
+              </div>
+              <div class="op-label">{{ op.label }}</div>
+              <span *ngIf="op.selected" class="sparkle">✨</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Digits section -->
+        <div class="config-section">
+          <div class="section-label">How many digits?</div>
+          <div class="option-grid">
+            <div *ngFor="let d of digitOptions"
+                 class="option-card magic-btn"
+                 [class.selected]="selectedDigits === d"
+                 (click)="selectDigits(d)">
+              <span class="option-number">{{ d }}</span>
+              <span class="option-text">Digit{{ d > 1 ? 's' : '' }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Questions section -->
+        <div class="config-section">
+          <div class="section-label">How many questions?</div>
+          <div class="option-grid">
+            <div *ngFor="let q of questionOptions"
+                 class="option-card magic-btn"
+                 [class.selected]="selectedQuestions === q"
+                 (click)="selectQuestions(q)">
+              <span class="option-number">{{ q }}</span>
+              <span class="option-text">Questions</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Start button -->
+      <div class="start-section">
+        <button class="start-btn magic-btn" [class.disabled]="!hasSelectedOperation" (click)="startTest()">
+          <span class="start-icon">🪄</span>
+          <span class="start-text">Start Test</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Enhanced water animation -->
+  <div class="water-bg-anim"></div>
+</div>

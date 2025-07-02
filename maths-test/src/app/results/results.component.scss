@@ -1,0 +1,63 @@
+.results-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+}
+
+.results-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem 2.5rem 2rem 2.5rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+  border-radius: 1.5rem;
+  text-align: center;
+  animation: cardPop 0.7s cubic-bezier(0.35, 0, 0.25, 1);
+}
+
+@keyframes cardPop {
+  0% {
+    transform: scale(0.95) translateY(40px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+h2 {
+  color: #3f51b5;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.score-text {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+}
+
+.score {
+  color: #43a047;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.total {
+  color: #3f51b5;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+button {
+  width: 100%;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: transform 0.2s cubic-bezier(0.4,0,0.2,1);
+}
+
+button:active {
+  transform: scale(0.97);
+}

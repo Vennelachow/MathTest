@@ -1,0 +1,50 @@
+<div class="quiz-bg">
+  <div class="math-bg-icons">
+    <svg class="math-icon plus" width="60" height="60" viewBox="0 0 36 36"><circle cx="18" cy="18" r="18" fill="#43e97b"/><rect x="16" y="8" width="4" height="20" rx="2" fill="#fff"/><rect x="8" y="16" width="20" height="4" rx="2" fill="#fff"/></svg>
+    <svg class="math-icon minus" width="60" height="60" viewBox="0 0 36 36"><circle cx="18" cy="18" r="18" fill="#38f9d7"/><rect x="8" y="16" width="20" height="4" rx="2" fill="#fff"/></svg>
+    <svg class="math-icon times" width="60" height="60" viewBox="0 0 36 36"><circle cx="18" cy="18" r="18" fill="#1976d2"/><rect x="16.5" y="8" width="3" height="20" rx="1.5" fill="#fff" transform="rotate(45 18 18)"/><rect x="16.5" y="8" width="3" height="20" rx="1.5" fill="#fff" transform="rotate(-45 18 18)"/></svg>
+    <svg class="math-icon divide" width="60" height="60" viewBox="0 0 36 36"><circle cx="18" cy="18" r="18" fill="#0f2027"/><rect x="8" y="16" width="20" height="4" rx="2" fill="#fff"/><circle cx="18" cy="11" r="2" fill="#fff"/><circle cx="18" cy="25" r="2" fill="#fff"/></svg>
+  </div>
+  <div class="quiz-container">
+    <mat-card class="quiz-card" [@questionFade]>
+      <div class="star-progress">
+        <ng-container *ngFor="let i of [].constructor(totalQuestions); let idx = index">
+          <span class="star" [class.filled]="idx < currentIndex && quizService.getQuestions()[idx]?.isCorrect">⭐</span>
+        </ng-container>
+      </div>
+      <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
+      <div class="question-header">
+        <span class="question-number">Question {{ currentIndex + 1 }} of {{ totalQuestions }}</span>
+      </div>
+      <div class="question-text">
+        <span>
+          {{ currentQuestion.operand1 }}
+          <ng-container [ngSwitch]="currentQuestion.operation">
+            <span *ngSwitchCase="'addition'">+</span>
+            <span *ngSwitchCase="'subtraction'">-</span>
+            <span *ngSwitchCase="'multiplication'">×</span>
+            <span *ngSwitchCase="'division'">÷</span>
+          </ng-container>
+          {{ currentQuestion.operand2 }} = ?
+        </span>
+      </div>
+      <form [formGroup]="answerForm" (ngSubmit)="submitAnswer()">
+        <div class="answer-input-row">
+          <input type="number" formControlName="answer" class="big-answer-input" autocomplete="off" [disabled]="showFeedback" placeholder="Type your answer...">
+        </div>
+        <div class="feedback-row" *ngIf="showFeedback">
+          <span *ngIf="feedback === 'correct'" class="feedback-icon correct" [@questionFade]>
+            🎉 Awesome! ⭐
+          </span>
+          <span *ngIf="feedback === 'incorrect'" class="feedback-icon incorrect" [@questionFade]>
+            😅 Oops! Try the next one!
+          </span>
+        </div>
+        <button mat-raised-button color="primary" class="next-btn" type="submit" [disabled]="!answerForm.valid || showFeedback">
+          {{ isLastQuestion ? 'Finish' : 'Next Question' }}
+        </button>
+      </form>
+      <div class="confetti" *ngIf="showConfetti"></div>
+    </mat-card>
+  </div>
+</div>
